@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Miles/projects/at_restaurants/app/src/main/res/drawable/shape_search_item_background.xml" value="0.31076923076923074" />
         <entry key="..\:/Users/Miles/projects/at_restaurants/app/src/main/res/layout/activity_main.xml" value="0.20462962962962963" />
-        <entry key="..\:/Users/Miles/projects/at_restaurants/app/src/main/res/layout/fragment_search.xml" value="0.20462962962962963" />
+        <entry key="..\:/Users/Miles/projects/at_restaurants/app/src/main/res/layout/fragment_search.xml" value="0.35939323220536756" />
+        <entry key="..\:/Users/Miles/projects/at_restaurants/app/src/main/res/layout/item_restaurant.xml" value="0.22" />
       </map>
     </option>
   </component>

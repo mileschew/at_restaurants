@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/shape_search_item_background"
+    android:padding="@dimen/spacing_default">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/thumbnail"
+        android:layout_width="@dimen/restaurant_search_size"
+        android:layout_height="@dimen/restaurant_search_size"
+        android:background="@color/loading_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_default"
+        android:text="@string/empty"
+        app:layout_constraintStart_toEndOf="@id/thumbnail"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Restaurant Name" />
+
+    <View
+        android:id="@+id/rating"
+        android:layout_width="70dp"
+        android:layout_height="10dp"
+        android:layout_marginStart="@dimen/spacing_default"
+        android:layout_marginTop="@dimen/spacing_very_small"
+        android:background="@color/loading_gray"
+        app:layout_constraintStart_toEndOf="@id/thumbnail"
+        app:layout_constraintTop_toBottomOf="@id/name" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/price_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_default"
+        android:layout_marginTop="@dimen/spacing_very_small"
+        android:text="@string/empty"
+        app:layout_constraintStart_toEndOf="@id/thumbnail"
+        app:layout_constraintTop_toBottomOf="@id/rating"
+        tools:text="$$$" />
+
+    <View
+        android:id="@+id/separator"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_marginStart="@dimen/spacing_very_small"
+        android:background="@color/loading_gray"
+        app:layout_constraintBottom_toBottomOf="@id/price_rating"
+        app:layout_constraintStart_toEndOf="@id/price_rating"
+        app:layout_constraintTop_toTopOf="@id/price_rating" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/supporting_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_very_small"
+        android:text="@string/empty"
+        app:layout_constraintBottom_toBottomOf="@id/price_rating"
+        app:layout_constraintStart_toEndOf="@id/separator"
+        app:layout_constraintTop_toTopOf="@id/price_rating"
+        tools:text="Supporting Text" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/favorite_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@color/loading_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
