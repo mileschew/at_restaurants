@@ -6,29 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.mchew.atrestaurants.core.BaseFragment
 import com.mchew.atrestaurants.core.DataState
-import com.mchew.atrestaurants.databinding.FragmentSearchBinding
+import dagger.hilt.android.AndroidEntryPoint
+import com.mchew.atrestaurants.databinding.FragmentSearchBinding as VB
 
-class SearchFragment : Fragment() {
+@AndroidEntryPoint
+class SearchFragment : BaseFragment<VB>() {
 
-    private var _binding: FragmentSearchBinding? = null
-    private val binding: FragmentSearchBinding
-        get() = _binding!!
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB = VB::inflate
 
     private val viewModel by viewModels<SearchViewModel>()
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
-        _binding = FragmentSearchBinding.inflate(layoutInflater, container, false)
-        return binding.root
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
