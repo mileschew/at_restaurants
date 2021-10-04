@@ -10,10 +10,10 @@ import androidx.fragment.app.viewModels
 import com.mchew.atrestaurants.core.BaseFragment
 import com.mchew.atrestaurants.core.DataState
 import dagger.hilt.android.AndroidEntryPoint
-import com.mchew.atrestaurants.databinding.FragmentSearchBinding as VB
+import com.mchew.atrestaurants.databinding.FragmentListBinding as VB
 
 @AndroidEntryPoint
-class SearchFragment : BaseFragment<VB>() {
+class ListFragment : BaseFragment<VB>() {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB = VB::inflate
 
