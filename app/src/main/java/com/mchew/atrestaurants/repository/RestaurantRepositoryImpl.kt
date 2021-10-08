@@ -1,15 +1,14 @@
-package com.mchew.atrestaurants.ui
+package com.mchew.atrestaurants.repository
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
 import com.mchew.atrestaurants.core.DataState
 import com.mchew.atrestaurants.model.domain.Restaurant
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.flow
 
-class SearchViewModel : ViewModel() {
+class RestaurantRepositoryImpl : RestaurantRepository {
 
-    val restaurantList = liveData {
-        emit(DataState.Loading(null))
+    override suspend fun getRestaurants() = flow {
+        emit(DataState.Loading)
         delay(3000)
         emit(DataState.Success(
             listOf(
@@ -17,9 +16,8 @@ class SearchViewModel : ViewModel() {
                 Restaurant("restaurant 2"),
                 Restaurant("restaurant 3"),
                 Restaurant("restaurant 4"),
-                Restaurant("restaurant 5"),
+                Restaurant("restaurant 5")
             )
         ))
     }
-
 }

@@ -40,7 +40,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:text="Toggle"
+        android:background="@drawable/shape_toggle_button_background"
+        android:drawableStart="@drawable/ic_outline_location_on_24"
+        android:paddingHorizontal="24dp"
+        android:text="@string/cta_map"
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Inverse"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

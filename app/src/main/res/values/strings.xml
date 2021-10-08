@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">AT Restaurants</string>
     <string name="empty">-</string>
+
+    <string name="cta_list">List</string>
+    <string name="cta_map">Map</string>
 </resources>

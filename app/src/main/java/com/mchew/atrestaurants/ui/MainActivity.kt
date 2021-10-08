@@ -29,12 +29,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun toggleViewToMap() {
-        val action = ListFragmentDirections.actionListToMap()
-        navController.navigate(action)
+        navController.navigate(ListFragmentDirections.actionListToMap())
+        // set toggle button to List
+        with(binding.viewToggleButton) {
+            text = getString(R.string.cta_list)
+            setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_outline_format_list_bulleted_24, 0, 0, 0)
+        }
     }
 
     private fun toggleViewToList() {
-        val action = MapFragmentDirections.actionMapToList()
-        navController.navigate(action)
+        navController.navigate(MapFragmentDirections.actionMapToList())
+        // set toggle button to Map
+        with(binding.viewToggleButton) {
+            text = getString(R.string.cta_map)
+            setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_outline_location_on_24, 0, 0, 0)
+        }
     }
 }

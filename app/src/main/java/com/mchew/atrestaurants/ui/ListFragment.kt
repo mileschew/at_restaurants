@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.mchew.atrestaurants.core.BaseFragment
 import com.mchew.atrestaurants.core.DataState
+import com.mchew.atrestaurants.viewmodel.RestaurantViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import com.mchew.atrestaurants.databinding.FragmentListBinding as VB
 
@@ -17,19 +18,18 @@ class ListFragment : BaseFragment<VB>() {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB = VB::inflate
 
-    private val viewModel by viewModels<SearchViewModel>()
+    private val viewModel: RestaurantViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel.restaurantList.observe(viewLifecycleOwner) { result ->
-            when (result) {
+        viewModel.restaurantsState.observe(viewLifecycleOwner) {
+            when (it) {
                 is DataState.Loading -> {
                     binding.loading.isVisible = true
                 }
                 is DataState.Success -> {
                     binding.loading.isGone = true
-                    val restaurants = result.data
+                    val restaurants = it.data
                     binding.restaurantList.adapter = RestaurantAdapter(restaurants)
                 }
                 is DataState.Error -> {
