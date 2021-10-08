@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mchew.atrestaurants.databinding.ItemRestaurantBinding
 import com.mchew.atrestaurants.model.domain.Restaurant
+import java.lang.StringBuilder
 
 class RestaurantAdapter(
     private val items: List<Restaurant>
@@ -25,8 +26,18 @@ class RestaurantAdapter(
         private val binding: ItemRestaurantBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(restaurant: Restaurant) {
-            binding.name.text = restaurant.name
+        fun bind(restaurant: Restaurant) = with(binding) {
+            name.text = restaurant.name
+
+            priceLevel.text = restaurant.priceLevel?.toPticeString()
+        }
+
+        private fun Int.toPticeString(): String {
+            val sb = StringBuilder()
+            for (i in 0 until this) {
+                sb.append("$")
+            }
+            return sb.toString()
         }
     }
 }

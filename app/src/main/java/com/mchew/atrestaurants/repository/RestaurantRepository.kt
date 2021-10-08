@@ -5,5 +5,5 @@ import com.mchew.atrestaurants.model.domain.Restaurant
 import kotlinx.coroutines.flow.Flow
 
 interface RestaurantRepository {
-    suspend fun getRestaurants(): Flow<DataState<List<Restaurant>>>
+    suspend fun getRestaurants(searchQuery: String): Flow<DataState<List<Restaurant>>>
 }

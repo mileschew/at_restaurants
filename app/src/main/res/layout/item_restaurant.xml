@@ -38,7 +38,7 @@
         app:layout_constraintTop_toBottomOf="@id/name" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/price_rating"
+        android:id="@+id/price_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_default"
@@ -54,9 +54,9 @@
         android:layout_height="8dp"
         android:layout_marginStart="@dimen/spacing_very_small"
         android:background="@color/loading_gray"
-        app:layout_constraintBottom_toBottomOf="@id/price_rating"
-        app:layout_constraintStart_toEndOf="@id/price_rating"
-        app:layout_constraintTop_toTopOf="@id/price_rating" />
+        app:layout_constraintBottom_toBottomOf="@id/price_level"
+        app:layout_constraintStart_toEndOf="@id/price_level"
+        app:layout_constraintTop_toTopOf="@id/price_level" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/supporting_text"
@@ -64,9 +64,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_very_small"
         android:text="@string/empty"
-        app:layout_constraintBottom_toBottomOf="@id/price_rating"
+        app:layout_constraintBottom_toBottomOf="@id/price_level"
         app:layout_constraintStart_toEndOf="@id/separator"
-        app:layout_constraintTop_toTopOf="@id/price_rating"
+        app:layout_constraintTop_toTopOf="@id/price_level"
         tools:text="Supporting Text" />
 
     <androidx.appcompat.widget.AppCompatImageView

@@ -13,7 +13,7 @@ class RestaurantViewModel @Inject constructor(
 ) : ViewModel() {
 
     val restaurantsState = liveData {
-        restaurantRepository.getRestaurants().collect {
+        restaurantRepository.getRestaurants("Beaverton Bar").collect {
             emit(it)
         }
     }
