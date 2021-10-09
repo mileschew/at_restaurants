@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.facebook.shimmer.ShimmerFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_search_item_background"
+        android:padding="@dimen/spacing_default">
+
+        <View
+            android:id="@+id/thumbnail_loading"
+            android:layout_width="@dimen/restaurant_search_size"
+            android:layout_height="@dimen/restaurant_search_size"
+            android:background="@color/loading_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/name_loading"
+            android:layout_width="200dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="@dimen/spacing_default"
+            android:background="@drawable/shape_gray_pill"
+            app:layout_constraintStart_toEndOf="@id/thumbnail_loading"
+            app:layout_constraintTop_toTopOf="@id/thumbnail_loading" />
+
+        <View
+            android:id="@+id/rating_loading"
+            android:layout_width="100dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="@dimen/spacing_default"
+            android:layout_marginTop="@dimen/spacing_very_small"
+            android:background="@drawable/shape_gray_pill"
+            app:layout_constraintStart_toEndOf="@id/thumbnail_loading"
+            app:layout_constraintTop_toBottomOf="@id/name_loading" />
+
+        <View
+            android:id="@+id/details_loading"
+            android:layout_width="150dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="@dimen/spacing_default"
+            android:layout_marginTop="@dimen/spacing_very_small"
+            android:background="@drawable/shape_gray_pill"
+            app:layout_constraintStart_toEndOf="@id/thumbnail_loading"
+            app:layout_constraintTop_toBottomOf="@id/rating_loading" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.facebook.shimmer.ShimmerFrameLayout>

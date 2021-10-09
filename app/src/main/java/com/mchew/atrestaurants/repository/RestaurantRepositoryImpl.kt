@@ -5,6 +5,7 @@ import com.mchew.atrestaurants.model.network.PlaceResultStatus
 import com.mchew.atrestaurants.model.network.toDomain
 import com.mchew.atrestaurants.retrofit.RestaurantRetrofit
 import kotlinx.coroutines.flow.flow
+import timber.log.Timber
 
 class RestaurantRepositoryImpl(
     private val networkDataSource: RestaurantRetrofit
@@ -13,6 +14,7 @@ class RestaurantRepositoryImpl(
     override suspend fun getRestaurants(searchQuery: String) = flow {
         emit(DataState.Loading)
         kotlin.runCatching {
+            kotlinx.coroutines.delay(2000)//FIXME temp for loading state
             networkDataSource.getRestaurantsFromSearch(searchQuery)
         }.onSuccess {
             when(PlaceResultStatus.valueOf(it.status)) {
@@ -20,11 +22,13 @@ class RestaurantRepositoryImpl(
                     emit(DataState.Success(it.toDomain()))
                 }
                 else -> {
-                    //TODO flesh out error
-                    emit(DataState.Error(Throwable("Error")))
+                    val error = RuntimeException("Endpoint returned status ${it.status}")
+                    Timber.e(error)
+                    emit(DataState.Error(error))
                 }
             }
         }.onFailure {
+            Timber.e(it, "Error retrieving restaurants.")
             emit(DataState.Error(it))
         }
     }

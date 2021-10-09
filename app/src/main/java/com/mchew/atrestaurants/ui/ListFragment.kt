@@ -30,7 +30,7 @@ class ListFragment : BaseFragment<VB>() {
                 is DataState.Success -> {
                     binding.loading.isGone = true
                     val restaurants = it.data
-                    binding.restaurantList.adapter = RestaurantAdapter(restaurants)
+                    binding.restaurantList.adapter = RestaurantAdapter(requireContext(), restaurants)
                 }
                 is DataState.Error -> {
                     binding.loading.isGone = true

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
+    android:layout_marginBottom="@dimen/spacing_small"
     android:background="@drawable/shape_search_item_background"
     android:padding="@dimen/spacing_default">
 

@@ -18,14 +18,16 @@
         tools:itemCount="5"
         tools:listitem="@layout/item_restaurant" />
 
-    <View
+    <FrameLayout
         android:id="@+id/loading"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@color/loading_gray"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="26dp"
+        android:paddingVertical="30dp"
+        tools:visibility="gone">
+
+        <include layout="@layout/fragment_list_loading" />
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
