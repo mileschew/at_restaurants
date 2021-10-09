@@ -14,6 +14,7 @@ data class RestaurantSearchNetworkResult(
         @SerialName("place_id") val id: String,
         val name: String,
         val rating: Float? = null,
+        @SerialName("user_ratings_total") val userRatingsTotal: Int,
         @SerialName("price_level") val priceLevel: Int? = null,
         @SerialName("formatted_address") val formattedAddress: String? = null,
         @SerialName("opening_hours") val openingHours: PlaceOpeningHours? = null,
@@ -44,6 +45,7 @@ fun RestaurantSearchNetworkResult.toDomain(): List<Restaurant> {
             id = it.id,
             name = it.name,
             rating = it.rating,
+            ratingCount = it.userRatingsTotal,
             priceLevel = it.priceLevel,
             coordinates = it.geometry.location.run { Restaurant.Coordinates(lat, lng) }
         )

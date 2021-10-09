@@ -4,10 +4,11 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.mchew.atrestaurants.core.toPriceString
+import com.mchew.atrestaurants.core.toRaitingCountString
 import com.mchew.atrestaurants.databinding.ItemRestaurantBinding
 import com.mchew.atrestaurants.di.getAdapterImageManager
 import com.mchew.atrestaurants.model.domain.Restaurant
-import java.lang.StringBuilder
 
 class RestaurantAdapter(
     context: Context,
@@ -34,17 +35,10 @@ class RestaurantAdapter(
         fun bind(restaurant: Restaurant) = with(binding) {
             name.text = restaurant.name
             rating.rating = restaurant.rating ?: 0f
+            ratingCount.text = restaurant.ratingCount.toRaitingCountString()
             priceLevel.text = restaurant.priceLevel?.toPriceString()
             //FIXME using placeholder image until fetching real image is ready
             imageManager.loadImage("https://picsum.photos/501/501", thumbnail)
-        }
-
-        private fun Int.toPriceString(): String {
-            val sb = StringBuilder()
-            for (i in 0 until this) {
-                sb.append("$")
-            }
-            return sb.toString()
         }
     }
 }
