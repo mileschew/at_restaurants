@@ -28,7 +28,7 @@ class RestaurantAdapter(
 
         fun bind(restaurant: Restaurant) = with(binding) {
             name.text = restaurant.name
-
+            rating.rating = restaurant.rating ?: 0f
             priceLevel.text = restaurant.priceLevel?.toPticeString()
         }
 

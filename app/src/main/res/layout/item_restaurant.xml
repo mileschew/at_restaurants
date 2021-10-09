@@ -27,13 +27,17 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Restaurant Name" />
 
-    <View
+
+    <androidx.appcompat.widget.AppCompatRatingBar
         android:id="@+id/rating"
-        android:layout_width="70dp"
-        android:layout_height="10dp"
+        style="?attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_default"
         android:layout_marginTop="@dimen/spacing_very_small"
-        android:background="@color/loading_gray"
+        android:isIndicator="true"
+        android:rating="0"
+        android:stepSize="0.1"
         app:layout_constraintStart_toEndOf="@id/thumbnail"
         app:layout_constraintTop_toBottomOf="@id/name" />
 

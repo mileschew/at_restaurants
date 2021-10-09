@@ -2,9 +2,11 @@ package com.mchew.atrestaurants.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.navigation.findNavController
 import com.mchew.atrestaurants.R
 import com.mchew.atrestaurants.databinding.ActivityMainBinding
+import com.mchew.atrestaurants.viewmodel.RestaurantViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -14,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     private val navController by lazy {
         findNavController(R.id.nav_host_fragment)
     }
+    private val viewModel: RestaurantViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +29,8 @@ class MainActivity : AppCompatActivity() {
                 else -> toggleViewToList()
             }
         }
+
+        viewModel.fetchRestaurantsNearby()
     }
 
     private fun toggleViewToMap() {
