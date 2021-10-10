@@ -54,6 +54,10 @@ class RestaurantViewModel @Inject constructor(
         }
     }
 
+    fun setFavoriteStatus(restaurant: Restaurant, isFavorite: Boolean) {
+        //TODO update local db with favorite status
+    }
+
     private enum class StateEvent {
         NEARBY,
         TEXT_SEARCH

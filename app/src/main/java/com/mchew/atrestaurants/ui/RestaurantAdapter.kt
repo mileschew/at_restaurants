@@ -3,8 +3,10 @@ package com.mchew.atrestaurants.ui
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.mchew.atrestaurants.R
 import com.mchew.atrestaurants.core.toPriceString
 import com.mchew.atrestaurants.core.toRaitingCountString
 import com.mchew.atrestaurants.databinding.ItemRestaurantBinding
@@ -12,15 +14,16 @@ import com.mchew.atrestaurants.di.getAdapterImageManager
 import com.mchew.atrestaurants.model.domain.Restaurant
 
 class RestaurantAdapter(
-    context: Context,
-    private val items: List<Restaurant>
+    private val context: Context,
+    private val items: List<Restaurant>,
+    private val onFavoriteClickListener: OnFavoriteClickListener
 ) : RecyclerView.Adapter<RestaurantAdapter.RestaurantViewHolder>() {
 
     private val imageManager = context.getAdapterImageManager()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RestaurantViewHolder {
         val binding = ItemRestaurantBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return RestaurantViewHolder(binding)
+        return RestaurantViewHolder(binding, onFavoriteClickListener)
     }
 
     override fun onBindViewHolder(holder: RestaurantViewHolder, position: Int) {
@@ -30,7 +33,8 @@ class RestaurantAdapter(
     override fun getItemCount() = items.size
 
     inner class RestaurantViewHolder(
-        private val binding: ItemRestaurantBinding
+        private val binding: ItemRestaurantBinding,
+        private val onFavoriteClickListener: OnFavoriteClickListener
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(restaurant: Restaurant) = with(binding) {
@@ -42,6 +46,26 @@ class RestaurantAdapter(
             supportingText.text = restaurant.formattedAddress
             //FIXME using placeholder image until fetching real image is ready
             imageManager.loadImage("https://picsum.photos/501/501", thumbnail)
+            setFavoriteIcon(restaurant.isFavorite)
+            favoriteIcon.setOnClickListener {
+                restaurant.isFavorite = !restaurant.isFavorite
+                setFavoriteIcon(restaurant.isFavorite)
+                onFavoriteClickListener.onFavoriteClick(restaurant, restaurant.isFavorite)
+            }
+        }
+
+        private fun setFavoriteIcon(isFavorite: Boolean) {
+            binding.favoriteIcon.setImageDrawable(AppCompatResources.getDrawable(
+                context,
+                if (isFavorite)
+                    R.drawable.ic_baseline_favorite_24
+                else
+                    R.drawable.ic_baseline_favorite_border_24
+            ))
         }
     }
+}
+
+fun interface OnFavoriteClickListener{
+    fun onFavoriteClick(restaurant: Restaurant, isFavorite: Boolean)
 }

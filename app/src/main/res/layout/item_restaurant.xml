@@ -27,6 +27,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:text="@string/empty"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@id/favorite_icon"
         app:layout_constraintStart_toEndOf="@id/thumbnail"
         app:layout_constraintTop_toTopOf="parent"
@@ -95,9 +96,9 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/favorite_icon"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:background="@color/loading_gray"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:background="@drawable/ic_baseline_favorite_border_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

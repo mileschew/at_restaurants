@@ -37,7 +37,11 @@ class ListFragment : BaseFragment<VB>() {
                     binding.loadingScreen.isGone = true
                     binding.errorScreen.isGone = true
                     val restaurants = it.data
-                    binding.restaurantList.adapter = RestaurantAdapter(requireContext(), restaurants)
+                    binding.restaurantList.adapter = RestaurantAdapter(
+                        requireContext(),
+                        restaurants,
+                        viewModel::setFavoriteStatus
+                    )
                 }
                 else -> {
                     binding.loadingScreen.isGone = true
