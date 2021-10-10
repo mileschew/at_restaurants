@@ -22,20 +22,27 @@ class ListFragment : BaseFragment<VB>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.errorView.retryButton.setOnClickListener {
+            viewModel.retryLastRequest()
+        }
+
         viewModel.restaurantsState.observe(viewLifecycleOwner) {
             when (it) {
                 is DataState.Loading -> {
-                    binding.loading.isVisible = true
+                    binding.loadingScreen.isVisible = true
+                    binding.errorScreen.isGone = true
                 }
                 is DataState.Success -> {
-                    binding.loading.isGone = true
+                    binding.loadingScreen.isGone = true
+                    binding.errorScreen.isGone = true
                     val restaurants = it.data
                     binding.restaurantList.adapter = RestaurantAdapter(requireContext(), restaurants)
                 }
-                is DataState.Error -> {
-                    binding.loading.isGone = true
+                else -> {
+                    binding.loadingScreen.isGone = true
+                    binding.errorScreen.isVisible = true
                 }
-                else -> { }
             }
         }
     }

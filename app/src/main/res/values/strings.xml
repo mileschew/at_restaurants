@@ -4,4 +4,8 @@
 
     <string name="cta_list">List</string>
     <string name="cta_map">Map</string>
+    <string name="cta_filter">Filter</string>
+    <string name="cta_retry">Retry</string>
+
+    <string name="list_fragment_error_message">There was an error retrieving the data.\nPlease try again.</string>
 </resources>

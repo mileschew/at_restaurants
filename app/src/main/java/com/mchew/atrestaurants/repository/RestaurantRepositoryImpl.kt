@@ -14,10 +14,9 @@ class RestaurantRepositoryImpl(
     override suspend fun getRestaurants(searchQuery: String) = flow {
         emit(DataState.Loading)
         kotlin.runCatching {
-            kotlinx.coroutines.delay(2000)//FIXME temp for loading state
             networkDataSource.getRestaurantsFromSearch(searchQuery)
         }.onSuccess {
-            when(PlaceResultStatus.valueOf(it.status)) {
+            when (PlaceResultStatus.valueOf(it.status)) {
                 PlaceResultStatus.OK -> {
                     emit(DataState.Success(it.toDomain()))
                 }

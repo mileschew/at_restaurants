@@ -20,12 +20,12 @@ class HeaderFragment : BaseFragment<VB>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(binding) {
-            filterButton.setOnClickListener {
-                searchBar.text?.toString()?.let {
-                    viewModel.restaurantTextSearch(it)
-                }
-            }
+        binding.filterButton.setOnClickListener { submitSearch() }
+    }
+
+    private fun submitSearch() {
+        binding.searchBar.text?.toString()?.let {
+            if (it.isNotBlank()) viewModel.searchForRestaurants(it) else viewModel.fetchRestaurantsNearby()
         }
     }
 }

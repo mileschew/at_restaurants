@@ -23,7 +23,12 @@ class RestaurantViewModel @Inject constructor(
     val restaurantsState: LiveData<DataState<List<Restaurant>>>
         get() = _restaurantsState
 
-    fun fetchRestaurantsNearby()  = viewModelScope.launch {
+    // used in case of retry
+    private var lastRequest: StateEvent = StateEvent.NEARBY
+    private lateinit var lastSearch: String
+
+    fun fetchRestaurantsNearby() = viewModelScope.launch {
+        lastRequest = StateEvent.NEARBY
         // TODO replace with call to fetch nearby
         restaurantRepository.getRestaurants("Beaverton")
             .onEach {
@@ -31,11 +36,26 @@ class RestaurantViewModel @Inject constructor(
             }.launchIn(viewModelScope)
     }
 
-    fun restaurantTextSearch(searchQuery: String) = viewModelScope.launch {
+    fun searchForRestaurants(searchQuery: String) = viewModelScope.launch {
+        lastRequest = StateEvent.TEXT_SEARCH
+        lastSearch = searchQuery
         Timber.d("Beginning search for \"$searchQuery\"")
         restaurantRepository.getRestaurants(searchQuery)
             .onEach {
                 _restaurantsState.value = it
             }.launchIn(viewModelScope)
+    }
+
+    fun retryLastRequest() {
+        Timber.d("Retrying event: $lastRequest")
+        when (lastRequest) {
+            StateEvent.NEARBY -> fetchRestaurantsNearby()
+            StateEvent.TEXT_SEARCH -> searchForRestaurants(lastSearch)
+        }
+    }
+
+    private enum class StateEvent {
+        NEARBY,
+        TEXT_SEARCH
     }
 }
