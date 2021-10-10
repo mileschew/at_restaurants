@@ -6,6 +6,7 @@ data class Restaurant(
     val rating: Float?,
     val ratingCount: Int,
     val priceLevel: Int?,
+    val formattedAddress: String,
     val coordinates: Coordinates,
     var isFavorite: Boolean = false
 ) {

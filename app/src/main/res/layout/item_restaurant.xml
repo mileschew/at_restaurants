@@ -10,8 +10,9 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/thumbnail"
-        android:layout_width="@dimen/restaurant_search_size"
-        android:layout_height="@dimen/restaurant_search_size"
+        android:layout_width="@dimen/restaurant_thumbnail_size"
+        android:layout_height="@dimen/restaurant_thumbnail_size"
+        android:layout_marginEnd="@dimen/spacing_default"
         android:background="@color/loading_gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,10 +20,14 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_default"
+        android:layout_marginEnd="@dimen/spacing_default"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:text="@string/empty"
+        app:layout_constraintEnd_toStartOf="@id/favorite_icon"
         app:layout_constraintStart_toEndOf="@id/thumbnail"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Restaurant Name" />
@@ -62,26 +67,31 @@
         app:layout_constraintTop_toBottomOf="@id/rating"
         tools:text="$$$" />
 
-    <View
-        android:id="@+id/separator"
-        android:layout_width="8dp"
-        android:layout_height="8dp"
-        android:layout_marginStart="@dimen/spacing_very_small"
-        android:background="@color/loading_gray"
-        app:layout_constraintBottom_toBottomOf="@id/price_level"
-        app:layout_constraintStart_toEndOf="@id/price_level"
-        app:layout_constraintTop_toTopOf="@id/price_level" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/supporting_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_very_small"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/empty"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/separator"
+        app:layout_constraintTop_toBottomOf="@id/rating"
+        tools:text="Supporting Text" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/separator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_very_small"
-        android:text="@string/empty"
+        android:layout_margin="@dimen/spacing_very_small"
+        android:text="@string/restaurant_card_separator"
+        android:textSize="4sp"
         app:layout_constraintBottom_toBottomOf="@id/price_level"
-        app:layout_constraintStart_toEndOf="@id/separator"
-        app:layout_constraintTop_toTopOf="@id/price_level"
-        tools:text="Supporting Text" />
+        app:layout_constraintEnd_toStartOf="@id/supporting_text"
+        app:layout_constraintStart_toEndOf="@id/price_level"
+        app:layout_constraintTop_toTopOf="@id/price_level" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/favorite_icon"

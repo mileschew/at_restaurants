@@ -8,4 +8,6 @@
     <string name="cta_retry">Retry</string>
 
     <string name="list_fragment_error_message">There was an error retrieving the data.\nPlease try again.</string>
+
+    <string name="restaurant_card_separator">●</string>
 </resources>

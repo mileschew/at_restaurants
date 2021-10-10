@@ -3,5 +3,5 @@
     <dimen name="spacing_default">16dp</dimen>
     <dimen name="spacing_very_small">4dp</dimen>
     <dimen name="spacing_small">10dp</dimen>
-    <dimen name="restaurant_search_size">60dp</dimen>
+    <dimen name="restaurant_thumbnail_size">64dp</dimen>
 </resources>

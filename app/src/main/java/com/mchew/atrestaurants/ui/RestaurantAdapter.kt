@@ -3,6 +3,7 @@ package com.mchew.atrestaurants.ui
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.mchew.atrestaurants.core.toPriceString
 import com.mchew.atrestaurants.core.toRaitingCountString
@@ -37,6 +38,8 @@ class RestaurantAdapter(
             rating.rating = restaurant.rating ?: 0f
             ratingCount.text = restaurant.ratingCount.toRaitingCountString()
             priceLevel.text = restaurant.priceLevel?.toPriceString()
+            separator.isVisible = restaurant.priceLevel != null
+            supportingText.text = restaurant.formattedAddress
             //FIXME using placeholder image until fetching real image is ready
             imageManager.loadImage("https://picsum.photos/501/501", thumbnail)
         }

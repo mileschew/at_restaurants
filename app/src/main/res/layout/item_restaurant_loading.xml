@@ -13,8 +13,8 @@
 
         <View
             android:id="@+id/thumbnail_loading"
-            android:layout_width="@dimen/restaurant_search_size"
-            android:layout_height="@dimen/restaurant_search_size"
+            android:layout_width="@dimen/restaurant_thumbnail_size"
+            android:layout_height="@dimen/restaurant_thumbnail_size"
             android:background="@color/loading_gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
