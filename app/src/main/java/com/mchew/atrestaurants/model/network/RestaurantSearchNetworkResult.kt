@@ -47,6 +47,7 @@ fun RestaurantSearchNetworkResult.toDomain(): List<Restaurant> {
             rating = it.rating,
             ratingCount = it.userRatingsTotal,
             priceLevel = it.priceLevel,
+            isOpenNow = it.openingHours?.openNow ?: true,
             formattedAddress = it.formattedAddress,
             coordinates = it.geometry.location.run { Restaurant.Coordinates(lat, lng) }
         )

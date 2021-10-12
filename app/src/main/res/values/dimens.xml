@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="content_padding_horizontal">26dp</dimen>
+    <dimen name="content_padding_vertical">30dp</dimen>
     <dimen name="spacing_default">16dp</dimen>
     <dimen name="spacing_very_small">4dp</dimen>
     <dimen name="spacing_small">10dp</dimen>
+    <dimen name="favorite_icon_size">28dp</dimen>
     <dimen name="restaurant_thumbnail_size">64dp</dimen>
 </resources>

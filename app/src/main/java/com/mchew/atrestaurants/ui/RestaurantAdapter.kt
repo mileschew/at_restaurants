@@ -2,6 +2,7 @@ package com.mchew.atrestaurants.ui
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
@@ -16,14 +17,15 @@ import com.mchew.atrestaurants.model.domain.Restaurant
 class RestaurantAdapter(
     private val context: Context,
     private val items: List<Restaurant>,
-    private val onFavoriteClickListener: OnFavoriteClickListener
+    private val onFavoriteClickListener: OnFavoriteClickListener,
+    private val clickListener: (Restaurant) -> Any
 ) : RecyclerView.Adapter<RestaurantAdapter.RestaurantViewHolder>() {
 
     private val imageManager = context.getAdapterImageManager()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RestaurantViewHolder {
         val binding = ItemRestaurantBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return RestaurantViewHolder(binding, onFavoriteClickListener)
+        return RestaurantViewHolder(binding, clickListener, onFavoriteClickListener)
     }
 
     override fun onBindViewHolder(holder: RestaurantViewHolder, position: Int) {
@@ -34,8 +36,17 @@ class RestaurantAdapter(
 
     inner class RestaurantViewHolder(
         private val binding: ItemRestaurantBinding,
+        private val clickListener: (Restaurant) -> Any,
         private val onFavoriteClickListener: OnFavoriteClickListener
-    ) : RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            clickListener.invoke(items[bindingAdapterPosition])
+        }
 
         fun bind(restaurant: Restaurant) = with(binding) {
             name.text = restaurant.name
@@ -43,7 +54,7 @@ class RestaurantAdapter(
             ratingCount.text = restaurant.ratingCount.toRaitingCountString()
             priceLevel.text = restaurant.priceLevel?.toPriceString()
             separator.isVisible = restaurant.priceLevel != null
-            supportingText.text = restaurant.formattedAddress
+            address.text = restaurant.formattedAddress
             //FIXME using placeholder image until fetching real image is ready
             imageManager.loadImage("https://picsum.photos/501/501", thumbnail)
             setFavoriteIcon(restaurant.isFavorite)

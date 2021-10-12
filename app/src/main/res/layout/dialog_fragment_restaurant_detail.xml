@@ -4,47 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/spacing_small"
-    android:background="@drawable/shape_search_item_background"
-    android:padding="@dimen/spacing_default">
+    android:background="@drawable/shape_bottom_sheet"
+    android:paddingHorizontal="@dimen/content_padding_horizontal"
+    android:paddingBottom="@dimen/content_padding_vertical">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/thumbnail"
-        android:layout_width="@dimen/restaurant_thumbnail_size"
-        android:layout_height="@dimen/restaurant_thumbnail_size"
-        android:layout_marginEnd="@dimen/spacing_default"
-        android:background="@color/loading_gray"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <View
+        android:id="@+id/pull_tab"
+        android:layout_width="60dp"
+        android:layout_height="6dp"
+        android:layout_marginTop="@dimen/spacing_default"
+        android:background="@drawable/shape_gray_pill"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/name"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_default"
-        android:layout_marginEnd="@dimen/spacing_default"
-        android:ellipsize="end"
-        android:maxLines="1"
+        android:layout_marginTop="@dimen/spacing_default"
         android:text="@string/empty"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@id/favorite_icon"
-        app:layout_constraintStart_toEndOf="@id/thumbnail"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Restaurant Name" />
+        android:textSize="26sp"
+        app:layout_constraintTop_toBottomOf="@id/pull_tab"
+        tools:text="McDonald's Fancy Bistro" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:id="@+id/spacer"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        android:background="@color/dark_gray"/>
 
     <androidx.appcompat.widget.AppCompatRatingBar
         android:id="@+id/rating"
         style="?attr/ratingBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_default"
-        android:layout_marginTop="@dimen/spacing_very_small"
+        android:layout_marginTop="@dimen/spacing_small"
         android:isIndicator="true"
         android:rating="0"
         android:stepSize="0.1"
-        app:layout_constraintStart_toEndOf="@id/thumbnail"
-        app:layout_constraintTop_toBottomOf="@id/name" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spacer" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/rating_count"
@@ -61,26 +63,21 @@
         android:id="@+id/price_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_default"
         android:layout_marginTop="@dimen/spacing_very_small"
         android:text="@string/empty"
-        app:layout_constraintStart_toEndOf="@id/thumbnail"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rating"
         tools:text="$$$" />
 
-
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/address"
+        android:id="@+id/open_status"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_very_small"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:text="@string/empty"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/spacing_very_small"
+        android:text="@string/restaurant_detail_open"
         app:layout_constraintStart_toEndOf="@id/separator"
-        app:layout_constraintTop_toBottomOf="@id/rating"
-        tools:text="Supporting Text" />
+        app:layout_constraintTop_toBottomOf="@id/rating" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/separator"
@@ -90,9 +87,19 @@
         android:text="@string/restaurant_card_separator"
         android:textSize="4sp"
         app:layout_constraintBottom_toBottomOf="@id/price_level"
-        app:layout_constraintEnd_toStartOf="@id/address"
+        app:layout_constraintEnd_toStartOf="@id/open_status"
         app:layout_constraintStart_toEndOf="@id/price_level"
         app:layout_constraintTop_toTopOf="@id/price_level" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_very_small"
+        android:text="@string/empty"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/price_level"
+        tools:text="123 Main Street" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/favorite_icon"
@@ -100,6 +107,6 @@
         android:layout_height="@dimen/favorite_icon_size"
         android:background="@drawable/ic_baseline_favorite_border_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/rating_count" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

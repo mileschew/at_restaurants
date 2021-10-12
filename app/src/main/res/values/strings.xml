@@ -10,4 +10,6 @@
     <string name="list_fragment_error_message">There was an error retrieving the data.\nPlease try again.</string>
 
     <string name="restaurant_card_separator">●</string>
+    <string name="restaurant_detail_open">Open Now</string>
+    <string name="restaurant_detail_closed">Closed</string>
 </resources>

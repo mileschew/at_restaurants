@@ -14,4 +14,7 @@
     <color name="loading_gray">#AAAAAA</color>
     <color name="logo_green">#428713</color>
     <color name="button_green">#418A13</color>
+
+    <color name="text_red">#EF3131</color>
+    <color name="text_green">#42ED42</color>
 </resources>

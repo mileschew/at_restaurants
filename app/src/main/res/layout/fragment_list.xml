@@ -12,8 +12,8 @@
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:orientation="vertical"
-        android:paddingHorizontal="26dp"
-        android:paddingVertical="30dp"
+        android:paddingHorizontal="@dimen/content_padding_horizontal"
+        android:paddingVertical="@dimen/content_padding_vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="5"
         tools:listitem="@layout/item_restaurant" />
@@ -22,8 +22,8 @@
         android:id="@+id/loading_screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="26dp"
-        android:paddingVertical="30dp"
+        android:paddingHorizontal="@dimen/content_padding_horizontal"
+        android:paddingVertical="@dimen/content_padding_vertical"
         tools:visibility="gone">
 
         <include layout="@layout/fragment_list_loading" />
