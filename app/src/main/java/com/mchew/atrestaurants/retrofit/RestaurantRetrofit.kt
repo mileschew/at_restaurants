@@ -14,7 +14,5 @@ interface RestaurantRetrofit {
         @Query("key") key: String = BuildConfig.PLACE_API_KEY
     ): RestaurantSearchNetworkResult
 
-    //TODO suspend fun getPhoto()
-
     //TODO suspend fun getRestaurantDetails()
 }

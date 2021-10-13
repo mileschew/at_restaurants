@@ -6,21 +6,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.mchew.atrestaurants.R
+import com.mchew.atrestaurants.core.ImageManager
+import com.mchew.atrestaurants.core.getGooglePlacePhotoUrl
 import com.mchew.atrestaurants.core.toPriceString
 import com.mchew.atrestaurants.core.toRaitingCountString
 import com.mchew.atrestaurants.databinding.DialogFragmentRestaurantDetailBinding
 import com.mchew.atrestaurants.model.domain.Restaurant
 import com.mchew.atrestaurants.viewmodel.RestaurantViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class RestaurantDetailDialogFragment : DialogFragment() {
+
+    @Inject
+    lateinit var imageManager: ImageManager
 
     private var _binding: DialogFragmentRestaurantDetailBinding? = null
     private val binding: DialogFragmentRestaurantDetailBinding
@@ -58,8 +65,11 @@ class RestaurantDetailDialogFragment : DialogFragment() {
             priceLevel.text = restaurant.priceLevel?.toPriceString()
             separator.isVisible = restaurant.priceLevel != null
             address.text = restaurant.formattedAddress
-            //FIXME using placeholder image until fetching real image is ready
-//            imageManager.loadImage("https://picsum.photos/501/501", thumbnail)
+            restaurant.photoReference?.let {
+                imageManager.loadImage(getGooglePlacePhotoUrl(it, 1000), photo)
+            } ?: run {
+                photo.isGone = true
+            }
             setOpenStatus(restaurant.isOpenNow)
             setFavoriteIcon(restaurant.isFavorite)
             favoriteIcon.setOnClickListener {

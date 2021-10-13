@@ -8,6 +8,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.mchew.atrestaurants.R
+import com.mchew.atrestaurants.core.getGooglePlacePhotoUrl
 import com.mchew.atrestaurants.core.toPriceString
 import com.mchew.atrestaurants.core.toRaitingCountString
 import com.mchew.atrestaurants.databinding.ItemRestaurantBinding
@@ -55,8 +56,9 @@ class RestaurantAdapter(
             priceLevel.text = restaurant.priceLevel?.toPriceString()
             separator.isVisible = restaurant.priceLevel != null
             address.text = restaurant.formattedAddress
-            //FIXME using placeholder image until fetching real image is ready
-            imageManager.loadImage("https://picsum.photos/501/501", thumbnail)
+            restaurant.photoReference?.let {
+                imageManager.loadImage(getGooglePlacePhotoUrl(it), thumbnail)
+            }
             setFavoriteIcon(restaurant.isFavorite)
             favoriteIcon.setOnClickListener {
                 restaurant.isFavorite = !restaurant.isFavorite

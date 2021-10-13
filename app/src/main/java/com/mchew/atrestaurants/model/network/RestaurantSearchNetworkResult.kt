@@ -18,7 +18,8 @@ data class RestaurantSearchNetworkResult(
         @SerialName("price_level") val priceLevel: Int? = null,
         @SerialName("formatted_address") val formattedAddress: String,
         @SerialName("opening_hours") val openingHours: PlaceOpeningHours? = null,
-        val geometry: Geometry
+        val geometry: Geometry,
+        val photos: List<Photo>
 
     ) {
         @Serializable
@@ -31,6 +32,13 @@ data class RestaurantSearchNetworkResult(
                 val lng: Float
             )
         }
+
+        @Serializable
+        data class Photo(
+            val height: Int,
+            val width: Int,
+            @SerialName("photo_reference") val reference: String
+        )
 
         @Serializable
         data class PlaceOpeningHours(
@@ -48,6 +56,7 @@ fun RestaurantSearchNetworkResult.toDomain(): List<Restaurant> {
             ratingCount = it.userRatingsTotal,
             priceLevel = it.priceLevel,
             isOpenNow = it.openingHours?.openNow ?: true,
+            photoReference = it.photos.firstOrNull()?.reference,
             formattedAddress = it.formattedAddress,
             coordinates = it.geometry.location.run { Restaurant.Coordinates(lat, lng) }
         )

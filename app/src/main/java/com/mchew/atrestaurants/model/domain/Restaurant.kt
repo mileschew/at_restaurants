@@ -13,6 +13,7 @@ data class Restaurant(
     val formattedAddress: String,
     val coordinates: Coordinates,
     val isOpenNow: Boolean,
+    val photoReference: String?,
     var isFavorite: Boolean = false
 ) : JSerializable {
     @Serializable

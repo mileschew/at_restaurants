@@ -1,5 +1,6 @@
 package com.mchew.atrestaurants.core
 
+import com.mchew.atrestaurants.BuildConfig
 import java.lang.StringBuilder
 
 fun Int?.toPriceString(): String {
@@ -13,3 +14,10 @@ fun Int?.toPriceString(): String {
 }
 
 fun Int.toRaitingCountString() = "($this)"
+
+fun getGooglePlacePhotoUrl(photoReference: String, maxWidth: Int = 300): String {
+    return "https://maps.googleapis.com/maps/api/place/photo" +
+            "?maxwidth=$maxWidth" +
+            "&photo_reference=$photoReference" +
+            "&key=${BuildConfig.PLACE_API_KEY}"
+}
