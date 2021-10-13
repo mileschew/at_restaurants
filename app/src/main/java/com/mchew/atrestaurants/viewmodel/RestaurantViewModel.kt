@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.lang.IllegalStateException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -52,6 +53,10 @@ class RestaurantViewModel @Inject constructor(
             StateEvent.NEARBY -> fetchRestaurantsNearby()
             StateEvent.TEXT_SEARCH -> searchForRestaurants(lastSearch)
         }
+    }
+
+    fun showPermissionRequiredError() {
+        _restaurantsState.value = DataState.Error(IllegalStateException("Location Permission Required"))
     }
 
     fun setFavoriteStatus(restaurant: Restaurant, isFavorite: Boolean) {

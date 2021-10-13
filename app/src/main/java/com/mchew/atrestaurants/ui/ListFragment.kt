@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
@@ -29,24 +28,29 @@ class ListFragment : BaseFragment<VB>() {
         }
 
         viewModel.restaurantsState.observe(viewLifecycleOwner) { dataState ->
-            when (dataState) {
-                is DataState.Loading -> {
-                    binding.loadingScreen.isVisible = true
-                    binding.errorScreen.isGone = true
-                }
-                is DataState.Success -> {
-                    binding.loadingScreen.isGone = true
-                    binding.errorScreen.isGone = true
-                    val restaurants = dataState.data
-                    binding.restaurantList.adapter = RestaurantAdapter(
-                        requireContext(),
-                        restaurants,
-                        viewModel::setFavoriteStatus
-                    ) { RestaurantDetailDialogFragment.navigate(parentFragmentManager, it) }
-                }
-                else -> {
-                    binding.loadingScreen.isGone = true
-                    binding.errorScreen.isVisible = true
+            with(binding) {
+                when (dataState) {
+                    is DataState.Loading -> {
+                        loadingScreen.isVisible = true
+                        restaurantList.isVisible = false
+                        errorScreen.isGone = true
+                    }
+                    is DataState.Success -> {
+                        loadingScreen.isGone = true
+                        restaurantList.isVisible = true
+                        errorScreen.isGone = true
+                        val restaurants = dataState.data
+                        restaurantList.adapter = RestaurantAdapter(
+                            requireContext(),
+                            restaurants,
+                            viewModel::setFavoriteStatus
+                        ) { RestaurantDetailDialogFragment.navigate(parentFragmentManager, it) }
+                    }
+                    else -> {
+                        loadingScreen.isGone = true
+                        restaurantList.isVisible = false
+                        errorScreen.isVisible = true
+                    }
                 }
             }
         }

@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingHorizontal="@dimen/content_padding_horizontal"
-        android:paddingVertical="@dimen/content_padding_vertical"
+        android:paddingTop="@dimen/content_padding_vertical"
         tools:visibility="gone">
 
         <include layout="@layout/fragment_list_loading" />
@@ -33,7 +33,8 @@
     <FrameLayout
         android:id="@+id/error_screen"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <include
             android:id="@+id/error_view"
