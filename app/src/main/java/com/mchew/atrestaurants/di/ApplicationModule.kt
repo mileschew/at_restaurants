@@ -14,7 +14,7 @@ import dagger.hilt.components.SingletonComponent
 object ApplicationModule {
 
     @Provides
-    fun providesImageManager(
+    fun provideImageManager(
         @ApplicationContext context: Context
     ): ImageManager {
         return ImageManager(context)

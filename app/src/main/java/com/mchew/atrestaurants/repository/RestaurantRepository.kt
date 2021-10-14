@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface RestaurantRepository {
     suspend fun getRestaurants(searchQuery: String): Flow<DataState<List<Restaurant>>>
+    suspend fun updateFavoriteStatus(restaurant: Restaurant, isFavorite: Boolean)
 }

@@ -66,6 +66,11 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
     implementation 'androidx.preference:preference-ktx:1.1.1'
     implementation "androidx.viewpager2:viewpager2:1.0.0"
+    def room_version = "2.3.0"
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    testImplementation "androidx.room:room-testing:$room_version"
 
     // Third party
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'

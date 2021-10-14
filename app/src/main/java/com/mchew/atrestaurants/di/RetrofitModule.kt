@@ -18,7 +18,7 @@ import retrofit2.Retrofit
 object RetrofitModule {
 
     @Provides
-    fun providesRetrofit(): Retrofit {
+    fun provideRetrofit(): Retrofit {
         val contentType = MediaType.parse("application/json") ?: throw Throwable("Error creating JSON MediaType")
         val json = Json {
             ignoreUnknownKeys = true
@@ -30,7 +30,7 @@ object RetrofitModule {
     }
 
     @Provides
-    fun providesRestaurantService(
+    fun provideRestaurantService(
         retrofit: Retrofit
     ): RestaurantRetrofit {
         return retrofit.create(RestaurantRetrofit::class.java)

@@ -59,8 +59,9 @@ class RestaurantViewModel @Inject constructor(
         _restaurantsState.value = DataState.Error(IllegalStateException("Location Permission Required"))
     }
 
-    fun setFavoriteStatus(restaurant: Restaurant, isFavorite: Boolean) {
-        //TODO update local db with favorite status
+    fun setFavoriteStatus(restaurant: Restaurant, isFavorite: Boolean) = viewModelScope.launch {
+        restaurantRepository.updateFavoriteStatus(restaurant, isFavorite)
+
     }
 
     private enum class StateEvent {
