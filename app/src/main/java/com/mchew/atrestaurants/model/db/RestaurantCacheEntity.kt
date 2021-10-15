@@ -34,10 +34,10 @@ data class RestaurantCacheEntity(
     val formattedAddress: String,
 
     @ColumnInfo(name = "coordinate_lat")
-    val coordinateLatitude: Float,
+    val coordinateLatitude: Double,
 
     @ColumnInfo(name = "coordinate_lng")
-    val coordinateLongitude: Float,
+    val coordinateLongitude: Double,
 
     @ColumnInfo(name = "is_favorite")
     var isFavorite: Boolean = false

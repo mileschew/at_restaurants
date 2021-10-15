@@ -18,7 +18,7 @@ data class Restaurant(
 ) : JSerializable {
     @Serializable
     data class Coordinates(
-        val latitude: Float,
-        val longitude: Float
+        val latitude: Double,
+        val longitude: Double
     ) : JSerializable
 }

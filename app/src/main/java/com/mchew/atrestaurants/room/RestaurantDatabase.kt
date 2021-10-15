@@ -4,7 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.mchew.atrestaurants.model.db.RestaurantCacheEntity
 
-@Database(entities = [RestaurantCacheEntity::class], version = 2)
+@Database(entities = [RestaurantCacheEntity::class], version = 3)
 abstract class RestaurantDatabase : RoomDatabase() {
 
     abstract fun restaurauntDao(): RestaurantDao

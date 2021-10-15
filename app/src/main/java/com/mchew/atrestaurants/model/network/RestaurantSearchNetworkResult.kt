@@ -28,8 +28,8 @@ data class RestaurantSearchNetworkResult(
         ) {
             @Serializable
             data class LatLngLiteral(
-                val lat: Float,
-                val lng: Float
+                val lat: Double,
+                val lng: Double
             )
         }
 

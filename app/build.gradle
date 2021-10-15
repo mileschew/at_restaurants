@@ -24,6 +24,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "PLACE_API_KEY", apikeyProperties["place_api_key"])
+        manifestPlaceholders = [MAPS_API_KEY: apikeyProperties["maps_api_key"]]
     }
 
     buildTypes {
@@ -53,6 +54,7 @@ dependencies {
     implementation "com.google.dagger:hilt-android:2.38.1"
     kapt "com.google.dagger:hilt-compiler:2.38.1"
     implementation 'com.google.android.gms:play-services-location:18.0.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.1'
 
     // AndroidX
     implementation 'androidx.core:core-ktx:1.6.0'

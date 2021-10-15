@@ -27,8 +27,12 @@ class ListFragment : BaseFragment<VB>() {
             viewModel.retryLastRequest()
         }
 
-        viewModel.restaurantsState.observe(viewLifecycleOwner) { dataState ->
-            with(binding) {
+        observeViewModel()
+    }
+
+    private fun observeViewModel() {
+        with(binding) {
+            viewModel.restaurantsState.observe(viewLifecycleOwner) { dataState ->
                 when (dataState) {
                     is DataState.Loading -> {
                         loadingScreen.isVisible = true
