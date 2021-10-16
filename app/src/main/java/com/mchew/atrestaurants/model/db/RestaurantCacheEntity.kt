@@ -51,7 +51,7 @@ fun RestaurantCacheEntity.toDomain() = Restaurant(
     priceLevel = priceLevel,
     isOpenNow = isOpenNow,
     photoReference = photoReference,
-    formattedAddress = formattedAddress,
+    address = formattedAddress,
     coordinates = Restaurant.Coordinates(coordinateLatitude, coordinateLongitude),
     isFavorite = isFavorite
 )
@@ -64,7 +64,7 @@ fun Restaurant.toCacheEntity() = RestaurantCacheEntity(
     priceLevel = priceLevel,
     isOpenNow = isOpenNow,
     photoReference = photoReference,
-    formattedAddress = formattedAddress,
+    formattedAddress = address,
     coordinateLatitude = coordinates.latitude,
     coordinateLongitude = coordinates.longitude,
     isFavorite = isFavorite

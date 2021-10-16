@@ -15,7 +15,14 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="ATBottomSheetDialog" parent="@style/Theme.MaterialComponents.Light.BottomSheetDialog">
-
+    <style name="ATBottomSheetDialog" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="colorPrimary">@color/button_green</item>
+        <item name="colorPrimaryVariant">@color/white</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/button_green</item>
+        <item name="colorSecondaryVariant">@color/logo_green</item>
+        <item name="colorOnSecondary">@color/black</item>
     </style>
 </resources>

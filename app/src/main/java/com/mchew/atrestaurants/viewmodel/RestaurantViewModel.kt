@@ -1,5 +1,6 @@
 package com.mchew.atrestaurants.viewmodel
 
+import android.location.Location
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,12 +27,14 @@ class RestaurantViewModel @Inject constructor(
 
     // used in case of retry
     private var lastRequest: StateEvent = StateEvent.NEARBY
-    private lateinit var lastSearch: String
+    private var lastSearch: String? = null
+    private var lastLocation: Location? = null
 
-    fun fetchRestaurantsNearby() = viewModelScope.launch {
+    fun fetchRestaurantsNearby(location: Location) = viewModelScope.launch {
         lastRequest = StateEvent.NEARBY
-        // TODO replace with call to fetch nearby
-        restaurantRepository.getRestaurants("Beaverton")
+        lastLocation = location
+        Timber.d("Beginning search for restaurants around \"${location.latitude},${location.longitude}\"")
+        restaurantRepository.getRestaurantsNearby(location)
             .onEach {
                 _restaurantsState.value = it
             }.launchIn(viewModelScope)
@@ -41,7 +44,7 @@ class RestaurantViewModel @Inject constructor(
         lastRequest = StateEvent.TEXT_SEARCH
         lastSearch = searchQuery
         Timber.d("Beginning search for \"$searchQuery\"")
-        restaurantRepository.getRestaurants(searchQuery)
+        restaurantRepository.getRestaurantsFromSearch(searchQuery)
             .onEach {
                 _restaurantsState.value = it
             }.launchIn(viewModelScope)
@@ -50,8 +53,12 @@ class RestaurantViewModel @Inject constructor(
     fun retryLastRequest() {
         Timber.d("Retrying event: $lastRequest")
         when (lastRequest) {
-            StateEvent.NEARBY -> fetchRestaurantsNearby()
-            StateEvent.TEXT_SEARCH -> searchForRestaurants(lastSearch)
+            StateEvent.NEARBY ->  {
+                lastLocation?.let { fetchRestaurantsNearby(it) }
+            }
+            StateEvent.TEXT_SEARCH -> {
+                lastSearch?.let { searchForRestaurants(it) }
+            }
         }
     }
 

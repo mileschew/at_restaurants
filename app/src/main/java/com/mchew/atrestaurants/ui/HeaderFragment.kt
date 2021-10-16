@@ -25,7 +25,7 @@ class HeaderFragment : BaseFragment<VB>() {
 
     private fun submitSearch() {
         binding.searchBar.text?.toString()?.let {
-            if (it.isNotBlank()) viewModel.searchForRestaurants(it) else viewModel.fetchRestaurantsNearby()
+            if (it.isNotBlank()) viewModel.searchForRestaurants(it)
         }
     }
 }

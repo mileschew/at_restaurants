@@ -10,7 +10,7 @@ data class Restaurant(
     val rating: Float?,
     val ratingCount: Int,
     val priceLevel: Int?,
-    val formattedAddress: String,
+    val address: String,
     val coordinates: Coordinates,
     val isOpenNow: Boolean,
     val photoReference: String?,

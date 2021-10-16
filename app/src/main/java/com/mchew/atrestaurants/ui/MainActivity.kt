@@ -41,17 +41,19 @@ class MainActivity : AppCompatActivity() {
                 else -> toggleViewToList()
             }
         }
-//        permissionManager.verifyLocationPermission(this) { isAllowed ->
-//            if (isAllowed) {
-//                fusedLocationClient.lastLocation
-//                    .addOnSuccessListener { location: Location? ->
+        permissionManager.verifyLocationPermission(this) { isAllowed ->
+            if (isAllowed) {
+                fusedLocationClient.lastLocation
+                    .addOnSuccessListener { location: Location ->
                         // Got last known location. In some rare situations this can be null.
-                        viewModel.fetchRestaurantsNearby()
-//                    }
-//            } else {
-//                viewModel.showPermissionRequiredError()
-//            }
-//        }
+                        viewModel.fetchRestaurantsNearby(location)
+                    }.addOnFailureListener {
+                        viewModel.showPermissionRequiredError()
+                    }
+            } else {
+                viewModel.showPermissionRequiredError()
+            }
+        }
     }
 
     private fun toggleViewToMap() {

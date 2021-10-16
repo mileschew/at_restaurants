@@ -64,7 +64,7 @@ class RestaurantDetailDialogFragment : DialogFragment() {
             ratingCount.text = restaurant.ratingCount.toRaitingCountString()
             priceLevel.text = restaurant.priceLevel?.toPriceString()
             separator.isVisible = restaurant.priceLevel != null
-            address.text = restaurant.formattedAddress
+            address.text = restaurant.address
             restaurant.photoReference?.let {
                 imageManager.loadImage(getGooglePlacePhotoUrl(it, 1000), photo)
             } ?: run {

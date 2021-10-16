@@ -62,7 +62,7 @@ class MapFragment : BaseFragment<VB>() {
                         MarkerOptions()
                             .position(coordinates)
                             .title(it.name)
-                            .snippet(it.formattedAddress)
+                            .snippet(it.address)
                     )
                 }
 

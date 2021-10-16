@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RestaurantSearchNetworkResult(
+data class RestaurantNearbyNetworkResult(
     @SerialName("results") val restaurantResults: List<RestaurantResult>,
     val status: String
 ) {
@@ -16,7 +16,7 @@ data class RestaurantSearchNetworkResult(
         val rating: Float? = null,
         @SerialName("user_ratings_total") val userRatingsTotal: Int,
         @SerialName("price_level") val priceLevel: Int? = null,
-        @SerialName("formatted_address") val formattedAddress: String,
+        @SerialName("vicinity") val vicinity: String,
         @SerialName("opening_hours") val openingHours: PlaceOpeningHours? = null,
         val geometry: Geometry,
         val photos: List<Photo>
@@ -47,7 +47,7 @@ data class RestaurantSearchNetworkResult(
     }
 }
 
-fun RestaurantSearchNetworkResult.toDomain(): List<Restaurant> {
+fun RestaurantNearbyNetworkResult.toDomain(): List<Restaurant> {
     return restaurantResults.map {
         Restaurant(
             id = it.id,
@@ -57,7 +57,7 @@ fun RestaurantSearchNetworkResult.toDomain(): List<Restaurant> {
             priceLevel = it.priceLevel,
             isOpenNow = it.openingHours?.openNow ?: true,
             photoReference = it.photos.firstOrNull()?.reference,
-            address = it.formattedAddress,
+            address = it.vicinity,
             coordinates = it.geometry.location.run { Restaurant.Coordinates(lat, lng) }
         )
     }

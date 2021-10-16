@@ -55,7 +55,7 @@ class RestaurantAdapter(
             ratingCount.text = restaurant.ratingCount.toRaitingCountString()
             priceLevel.text = restaurant.priceLevel?.toPriceString()
             separator.isVisible = restaurant.priceLevel != null
-            address.text = restaurant.formattedAddress
+            address.text = restaurant.address
             restaurant.photoReference?.let {
                 imageManager.loadImage(getGooglePlacePhotoUrl(it), thumbnail)
             }
