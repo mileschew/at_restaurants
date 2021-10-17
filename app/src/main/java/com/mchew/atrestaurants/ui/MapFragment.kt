@@ -18,6 +18,8 @@ import com.mchew.atrestaurants.model.domain.Restaurant
 import com.mchew.atrestaurants.viewmodel.RestaurantViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import com.mchew.atrestaurants.databinding.FragmentMapBinding as VB
+import com.google.android.gms.maps.model.LatLngBounds
+
 
 @AndroidEntryPoint
 class MapFragment : BaseFragment<VB>() {
@@ -25,9 +27,11 @@ class MapFragment : BaseFragment<VB>() {
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB = VB::inflate
 
     private val viewModel: RestaurantViewModel by activityViewModels()
+    private lateinit var mapView: SupportMapFragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initMapView(savedInstanceState)
 
         binding.errorView.retryButton.setOnClickListener {
             permissionManager.verifyLocationPermission { isAllowed ->
@@ -47,34 +51,42 @@ class MapFragment : BaseFragment<VB>() {
                 }
                 is DataState.Success -> {
                     binding.errorScreen.isGone = true
-                    initMapView(dataState.data, savedInstanceState)
+                    updateMap(dataState.data)
                 }
             }
         }
     }
 
-    private fun initMapView(data: List<Restaurant>, savedInstanceState: Bundle?) {
-        val mapView = childFragmentManager.findFragmentById(R.id.map_view) as SupportMapFragment
+    private fun initMapView(savedInstanceState: Bundle?) {
+        mapView = childFragmentManager.findFragmentById(R.id.map_view) as SupportMapFragment
         mapView.run {
             onCreate(savedInstanceState)
             onResume()
-            getMapAsync { googleMap ->
-                // add markers for results
-                data.forEach {
-                    val coordinates = LatLng(it.coordinates.latitude, it.coordinates.longitude)
-                    googleMap.addMarker(
-                        MarkerOptions()
-                            .position(coordinates)
-                            .title(it.name)
-                            .snippet(it.address)
-                    )
-                }
 
-                // move camera to current location
-                val cameraCoordinates = LatLng(data[0].coordinates.latitude, data[0].coordinates.longitude)
-                googleMap.moveCamera(CameraUpdateFactory.newLatLng(cameraCoordinates))
-                googleMap.setMinZoomPreference(15f)
+        }
+    }
+
+    private fun updateMap(data: List<Restaurant>) {
+        mapView.getMapAsync { googleMap ->
+            googleMap.clear() // remove any previous markers
+
+            val boundsBuilder = LatLngBounds.Builder()
+
+            // add markers for results
+            data.forEach {
+                val coordinates = LatLng(it.coordinates.latitude, it.coordinates.longitude)
+                googleMap.addMarker(
+                    MarkerOptions()
+                        .position(coordinates)
+                        .title(it.name)
+                        .snippet(it.address)
+                )
+                boundsBuilder.include(coordinates)
             }
+            val bounds = boundsBuilder.build()
+
+            // move camera to contain all markers
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100))
         }
     }
 }
