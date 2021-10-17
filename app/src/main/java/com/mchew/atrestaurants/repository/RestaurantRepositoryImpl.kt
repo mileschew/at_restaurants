@@ -54,10 +54,19 @@ class RestaurantRepositoryImpl(
         }
     }
 
-    override suspend fun getRestaurantsFromSearch(searchQuery: String) = flow {
+    override suspend fun getRestaurantsFromSearch(searchQuery: String, location: Location?) = flow {
         emit(DataState.Loading)
         kotlin.runCatching {
-            networkDataSource.getRestaurantsFromSearch(searchQuery)
+            location?.let {
+                networkDataSource.getRestaurantsFromSearch(
+                    query = searchQuery,
+                    location = "${location.latitude},${location.longitude}"
+                )
+            } ?: run {
+                networkDataSource.getRestaurantsFromSearch(
+                    query = searchQuery
+                )
+            }
         }.onSuccess { networkResult ->
             when (PlaceResultStatus.valueOf(networkResult.status)) {
                 PlaceResultStatus.OK -> {

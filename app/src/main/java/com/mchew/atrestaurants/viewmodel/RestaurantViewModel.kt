@@ -44,7 +44,7 @@ class RestaurantViewModel @Inject constructor(
         lastRequest = StateEvent.TEXT_SEARCH
         lastSearch = searchQuery
         Timber.d("Beginning search for \"$searchQuery\"")
-        restaurantRepository.getRestaurantsFromSearch(searchQuery)
+        restaurantRepository.getRestaurantsFromSearch(searchQuery, lastLocation)
             .onEach {
                 _restaurantsState.value = it
             }.launchIn(viewModelScope)

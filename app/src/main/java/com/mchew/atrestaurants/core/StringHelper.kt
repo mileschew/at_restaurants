@@ -13,8 +13,9 @@ fun Int?.toPriceString(): String {
     }.orEmpty()
 }
 
-fun Int.toRaitingCountString() = "($this)"
+fun Int.toRatingCountString() = "($this)"
 
+// retrieve photo url from Google Place API
 fun getGooglePlacePhotoUrl(photoReference: String, maxWidth: Int = 300): String {
     return "https://maps.googleapis.com/maps/api/place/photo" +
             "?maxwidth=$maxWidth" +

@@ -16,7 +16,7 @@ import com.mchew.atrestaurants.R
 import com.mchew.atrestaurants.core.ImageManager
 import com.mchew.atrestaurants.core.getGooglePlacePhotoUrl
 import com.mchew.atrestaurants.core.toPriceString
-import com.mchew.atrestaurants.core.toRaitingCountString
+import com.mchew.atrestaurants.core.toRatingCountString
 import com.mchew.atrestaurants.databinding.DialogFragmentRestaurantDetailBinding
 import com.mchew.atrestaurants.model.domain.Restaurant
 import com.mchew.atrestaurants.viewmodel.RestaurantViewModel
@@ -61,7 +61,7 @@ class RestaurantDetailDialogFragment : DialogFragment() {
         with(binding) {
             name.text = restaurant.name
             rating.rating = restaurant.rating ?: 0f
-            ratingCount.text = restaurant.ratingCount.toRaitingCountString()
+            ratingCount.text = restaurant.ratingCount.toRatingCountString()
             priceLevel.text = restaurant.priceLevel?.toPriceString()
             separator.isVisible = restaurant.priceLevel != null
             address.text = restaurant.address

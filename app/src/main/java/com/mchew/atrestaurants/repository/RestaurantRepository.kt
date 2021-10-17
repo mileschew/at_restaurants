@@ -9,7 +9,7 @@ interface RestaurantRepository {
 
     suspend fun getRestaurantsNearby(location: Location): Flow<DataState<List<Restaurant>>>
 
-    suspend fun getRestaurantsFromSearch(searchQuery: String): Flow<DataState<List<Restaurant>>>
+    suspend fun getRestaurantsFromSearch(searchQuery: String, location: Location?): Flow<DataState<List<Restaurant>>>
 
     suspend fun updateFavoriteStatus(restaurant: Restaurant, isFavorite: Boolean)
 }
