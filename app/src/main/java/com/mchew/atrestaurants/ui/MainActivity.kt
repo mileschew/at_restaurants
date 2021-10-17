@@ -41,7 +41,8 @@ class MainActivity : AppCompatActivity() {
                 else -> toggleViewToList()
             }
         }
-        permissionManager.verifyLocationPermission(this) { isAllowed ->
+        permissionManager.registerForLocationPermission(this)
+        permissionManager.verifyLocationPermission { isAllowed ->
             if (isAllowed) {
                 fusedLocationClient.lastLocation
                     .addOnSuccessListener { location: Location ->

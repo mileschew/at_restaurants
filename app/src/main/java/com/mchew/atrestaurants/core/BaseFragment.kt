@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import javax.inject.Inject
 
 abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
@@ -14,6 +15,9 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         get() = _binding!!
 
     protected abstract val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB
+
+    @Inject
+    protected lateinit var permissionManager: PermissionManager
 
     override fun onCreateView(
         inflater: LayoutInflater,

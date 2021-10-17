@@ -24,8 +24,14 @@ class HeaderFragment : BaseFragment<VB>() {
     }
 
     private fun submitSearch() {
-        binding.searchBar.text?.toString()?.let {
-            if (it.isNotBlank()) viewModel.searchForRestaurants(it)
+        permissionManager.verifyLocationPermission { isAllowed ->
+            if (isAllowed) {
+                binding.searchBar.text?.toString()?.let {
+                    if (it.isNotBlank()) viewModel.searchForRestaurants(it)
+                }
+            } else {
+                viewModel.showPermissionRequiredError()
+            }
         }
     }
 }

@@ -30,7 +30,11 @@ class MapFragment : BaseFragment<VB>() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.errorView.retryButton.setOnClickListener {
-            viewModel.retryLastRequest()
+            permissionManager.verifyLocationPermission { isAllowed ->
+                if (isAllowed) {
+                    viewModel.retryLastRequest()
+                }
+            }
         }
 
         viewModel.restaurantsState.observe(viewLifecycleOwner) { dataState ->

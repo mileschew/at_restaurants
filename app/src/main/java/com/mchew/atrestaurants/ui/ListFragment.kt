@@ -24,7 +24,11 @@ class ListFragment : BaseFragment<VB>() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.errorView.retryButton.setOnClickListener {
-            viewModel.retryLastRequest()
+            permissionManager.verifyLocationPermission { isAllowed ->
+                if (isAllowed) {
+                    viewModel.retryLastRequest()
+                }
+            }
         }
 
         observeViewModel()
