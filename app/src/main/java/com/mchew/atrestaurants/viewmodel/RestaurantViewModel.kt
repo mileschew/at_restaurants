@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.lang.IllegalStateException
+import java.lang.RuntimeException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -53,7 +53,7 @@ class RestaurantViewModel @Inject constructor(
     fun retryLastRequest() {
         Timber.d("Retrying event: $lastRequest")
         when (lastRequest) {
-            StateEvent.NEARBY ->  {
+            StateEvent.NEARBY -> {
                 lastLocation?.let { fetchRestaurantsNearby(it) }
             }
             StateEvent.TEXT_SEARCH -> {
@@ -63,12 +63,13 @@ class RestaurantViewModel @Inject constructor(
     }
 
     fun showPermissionRequiredError() {
-        _restaurantsState.value = DataState.Error(IllegalStateException("Location Permission Required"))
+        Timber.d("showing error screen")
+        _restaurantsState.value = DataState.Error(RuntimeException("Location Permission Required"))
     }
 
     fun setFavoriteStatus(restaurant: Restaurant, isFavorite: Boolean) = viewModelScope.launch {
+        Timber.d("Favorite status of ${restaurant.id} to $isFavorite")
         restaurantRepository.updateFavoriteStatus(restaurant, isFavorite)
-
     }
 
     private enum class StateEvent {

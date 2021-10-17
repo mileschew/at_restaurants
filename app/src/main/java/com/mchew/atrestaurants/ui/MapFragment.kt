@@ -20,7 +20,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import com.mchew.atrestaurants.databinding.FragmentMapBinding as VB
 import com.google.android.gms.maps.model.LatLngBounds
 
-
 @AndroidEntryPoint
 class MapFragment : BaseFragment<VB>() {
 
@@ -62,13 +61,20 @@ class MapFragment : BaseFragment<VB>() {
         mapView.run {
             onCreate(savedInstanceState)
             onResume()
-
         }
     }
 
     private fun updateMap(data: List<Restaurant>) {
         mapView.getMapAsync { googleMap ->
             googleMap.clear() // remove any previous markers
+            googleMap.setOnInfoWindowClickListener { marker ->
+                // Get Restaurant details and present dialog
+                (marker.tag as? String)?.let { id ->
+                    data.find { it.id == id }?.let { r ->
+                        RestaurantDetailDialogFragment.present(parentFragmentManager, r)
+                    }
+                }
+            }
 
             val boundsBuilder = LatLngBounds.Builder()
 
@@ -80,7 +86,7 @@ class MapFragment : BaseFragment<VB>() {
                         .position(coordinates)
                         .title(it.name)
                         .snippet(it.address)
-                )
+                )?.tag = it.id
                 boundsBuilder.include(coordinates)
             }
             val bounds = boundsBuilder.build()

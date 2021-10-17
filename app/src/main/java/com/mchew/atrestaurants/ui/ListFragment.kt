@@ -52,7 +52,7 @@ class ListFragment : BaseFragment<VB>() {
                             requireContext(),
                             restaurants,
                             viewModel::setFavoriteStatus
-                        ) { RestaurantDetailDialogFragment.navigate(parentFragmentManager, it) }
+                        ) { RestaurantDetailDialogFragment.present(parentFragmentManager, it) }
                     }
                     else -> {
                         loadingScreen.isGone = true

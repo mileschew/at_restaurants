@@ -105,7 +105,7 @@ class RestaurantDetailDialogFragment : DialogFragment() {
     companion object {
         private const val ARGUMENT_RESTAURANT = "restaurant"
 
-        fun navigate(
+        fun present(
             fragmentManager: FragmentManager,
             restaurant: Restaurant,
         ) = RestaurantDetailDialogFragment().run {

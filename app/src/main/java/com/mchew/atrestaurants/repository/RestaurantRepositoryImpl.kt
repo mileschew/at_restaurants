@@ -26,6 +26,8 @@ class RestaurantRepositoryImpl(
         }.onSuccess { networkResult ->
             when (PlaceResultStatus.valueOf(networkResult.status)) {
                 PlaceResultStatus.OK -> {
+                    Timber.d("received ${networkResult.restaurantResults.size} restaurant results")
+
                     // map results to domain object list
                     val domainResults = networkResult.toDomain()
                     domainResults.forEach { result ->
@@ -70,6 +72,8 @@ class RestaurantRepositoryImpl(
         }.onSuccess { networkResult ->
             when (PlaceResultStatus.valueOf(networkResult.status)) {
                 PlaceResultStatus.OK -> {
+                    Timber.d("received ${networkResult.restaurantResults.size} restaurant results")
+
                     // map results to domain object list
                     val domainResults = networkResult.toDomain()
                     domainResults.forEach { result ->
