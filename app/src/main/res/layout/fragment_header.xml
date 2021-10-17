@@ -35,6 +35,7 @@
         android:layout_marginStart="18dp"
         android:drawableEnd="@drawable/ic_baseline_search_24"
         android:hint="@string/search_hint"
+        android:maxLines="1"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@id/filter_button"
         app:layout_constraintEnd_toEndOf="parent"

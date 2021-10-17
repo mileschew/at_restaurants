@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.activityViewModels
 import com.mchew.atrestaurants.core.BaseFragment
 import com.mchew.atrestaurants.viewmodel.RestaurantViewModel
@@ -20,7 +22,13 @@ class HeaderFragment : BaseFragment<VB>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.filterButton.setOnClickListener { submitSearch() }
+        binding.filterButton.setOnClickListener {
+            submitSearch()
+
+            // close keyboard if open
+            getSystemService(requireContext(), InputMethodManager::class.java)
+                ?.hideSoftInputFromWindow(requireActivity().currentFocus?.windowToken, 0)
+        }
     }
 
     private fun submitSearch() {
