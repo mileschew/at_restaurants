@@ -1,6 +1,7 @@
 package com.mchew.atrestaurants.ui
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,13 +23,17 @@ class HeaderFragment : BaseFragment<VB>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.filterButton.setOnClickListener {
-            submitSearch()
-
-            // close keyboard if open
-            getSystemService(requireContext(), InputMethodManager::class.java)
-                ?.hideSoftInputFromWindow(requireActivity().currentFocus?.windowToken, 0)
+        binding.searchBar.setOnKeyListener { _, keyCode, keyEvent ->
+            // Pressing Enter key submits search
+            if (keyEvent.action == KeyEvent.ACTION_DOWN
+                && keyCode == KeyEvent.KEYCODE_ENTER
+            ) {
+                submitSearch()
+                return@setOnKeyListener true
+            }
+            return@setOnKeyListener false
         }
+        binding.filterButton.setOnClickListener { submitSearch() }
     }
 
     private fun submitSearch() {
@@ -41,5 +46,9 @@ class HeaderFragment : BaseFragment<VB>() {
                 viewModel.showPermissionRequiredError()
             }
         }
+
+        // close keyboard if open
+        getSystemService(requireContext(), InputMethodManager::class.java)
+            ?.hideSoftInputFromWindow(requireActivity().currentFocus?.windowToken, 0)
     }
 }
